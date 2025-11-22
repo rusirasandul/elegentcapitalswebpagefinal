@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import url from 'sockjs-client/lib/utils/url';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
