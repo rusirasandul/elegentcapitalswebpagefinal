@@ -52,7 +52,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="section-padding bg-navy-800 dark:bg-gray-800">
+    <section id="about" className="section-padding bg-black">
       <div className="container-max">
         {/* Logo at top */}
         <div className="text-center mb-12">
@@ -93,7 +93,7 @@ const About = () => {
             </p>
             
             {/* Mission Statement */}
-            <div className="bg-navy-700 dark:bg-navy-600 p-6 rounded-lg">
+            <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
               <h3 className="text-xl font-semibold text-white mb-3">Our Mission</h3>
               <p className="text-gray-200">
                 To provide exceptional business and financial consulting services that drive 
@@ -102,11 +102,10 @@ const About = () => {
             </div>
           </div>
 
-          {/* Image/Visual */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="relative">
-              <div className="bg-gradient-to-br from-navy-800 to-gold-500 rounded-lg p-8 text-white">
-                <h3 className="text-2xl font-bold mb-4">Years of Excellence</h3>
+              <div className="bg-gradient-to-br from-black to-gray-800 rounded-lg p-8 text-white border border-gray-700">
+                <h3 className="text-2xl font-bold mb-4 text-gold-400">Years of Excellence</h3>
                 <div className="space-y-4">
                   <div className="flex items-center">
                     <div className="w-3 h-3 bg-gold-400 rounded-full mr-3"></div>
@@ -131,8 +130,8 @@ const About = () => {
               <div className="absolute -top-4 -right-4 w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center animate-pulse">
                 <span className="text-navy-800 font-bold text-xl">50+</span>
               </div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-navy-600 rounded-full flex items-center justify-center animate-pulse" style={{animationDelay: '1s'}}>
-                <span className="text-white font-bold">100%</span>
+              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-black border-2 border-gold-400 rounded-full flex items-center justify-center animate-pulse" style={{animationDelay: '1s'}}>
+                <span className="text-white font-bold text-xs">100%</span>
               </div>
             </div>
           </div>
@@ -140,14 +139,14 @@ const About = () => {
 
         {/* Values Section */}
         <div className="mt-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-center text-navy-800 dark:text-white mb-12">
+          <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">
             Our Core Values
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, index) => (
               <div 
                 key={index}
-                className={`text-center p-6 bg-navy-700 dark:bg-gray-700 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${
+                className={`text-center p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-700 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{transitionDelay: `${index * 200}ms`}}
@@ -155,10 +154,10 @@ const About = () => {
                 <div className="text-gold-400 mb-4 flex justify-center">
                   {value.icon}
                 </div>
-                <h4 className="text-xl font-semibold text-white dark:text-white mb-3">
+                <h4 className="text-xl font-semibold text-white mb-3">
                   {value.title}
                 </h4>
-                <p className="text-gray-200 dark:text-gray-300">
+                <p className="text-gray-200">
                   {value.description}
                 </p>
               </div>

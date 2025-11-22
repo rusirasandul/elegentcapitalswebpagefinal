@@ -47,7 +47,7 @@ const Team = () => {
         email: "elegantcapitals.heshan@gmail.com"
       }
     },
-    {
+    /*{
       name: "Hirantha Weerasinghe",
       position: "Business Development Manager",
       bio: "BSc in BM Logistics Mgt. (Special),Dip. in Digital Mrkt. (SL)",
@@ -58,7 +58,7 @@ const Team = () => {
         instagram: "https://instagram.com/emilyrodriguez_ops",
         email: "emily@elegantcapitals.com"
       }
-    },
+    },*/
     {
       name: "Rusira Sandul",
       position: "Brand Visibility Manager",
@@ -75,7 +75,7 @@ const Team = () => {
   ];
 
   return (
-    <section id="team" className="section-padding bg-gray-50 dark:bg-gray-800">
+    <section id="team" className="section-padding bg-black">
       <div className="container-max">
         {/* Header */}
         <div className="text-center mb-16">

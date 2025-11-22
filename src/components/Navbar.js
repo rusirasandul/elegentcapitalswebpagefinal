@@ -33,8 +33,8 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-navy-900/95 backdrop-blur-sm shadow-lg'
-          : 'bg-transparent'
+          ? 'bg-black/95 backdrop-blur-sm shadow-lg'
+          : 'bg-black/90'
       }`}
     >
       <div className="container-max">

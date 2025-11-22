@@ -86,7 +86,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding bg-navy-900 dark:bg-gray-900">
+    <section id="services" className="section-padding bg-black">
       <div className="container-max">
         {/* Header */}
         <div className="text-center mb-16">
