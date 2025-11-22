@@ -2,7 +2,7 @@ import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '94702022265'; // Sri Lanka phone number format
+  const phoneNumber = '94760158488'; // Sri Lanka phone number format
   const message = 'Hello! I would like to know more about Elegant Capitals services.';
 
   const handleWhatsAppClick = () => {
