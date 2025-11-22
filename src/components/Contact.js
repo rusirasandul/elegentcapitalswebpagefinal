@@ -69,7 +69,7 @@ const Contact = () => {
         </svg>
       ),
       title: "Phone",
-      details: "+94 705170403"
+      details: "+94 760158488"
     },
     {
       icon: (
