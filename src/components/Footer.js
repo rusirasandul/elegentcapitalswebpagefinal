@@ -73,14 +73,23 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-navy-900 text-white">
+    <footer className="bg-black text-white">
       <div className="container-max">
         {/* Main Footer Content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-navy-800 to-gold-500 rounded-lg flex items-center justify-center">
+              <img 
+                src={`${process.env.PUBLIC_URL}/images/logo/logo.jpeg`}
+                alt="Elegant Capitals Logo" 
+                className="w-10 h-10 rounded-lg object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextElementSibling.style.display = 'flex';
+                }}
+              />
+              <div className="w-8 h-8 bg-gradient-to-r from-navy-800 to-gold-500 rounded-lg items-center justify-center hidden">
                 <span className="text-white font-bold text-sm">EC</span>
               </div>
               <span className="ml-2 text-xl font-bold">Elegant Capitals</span>
