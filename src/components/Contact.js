@@ -40,7 +40,19 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Create mailto link with form data
+    const recipient = 'elegantcapitals.tharushi@gmail.com';
+    const subject = encodeURIComponent(`Contact Form: Message from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n\n` +
+      `Message:\n${formData.message}`
+    );
+    
+    // Open default email client
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    
+    // Show success message
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitStatus('success');
@@ -48,7 +60,7 @@ const Contact = () => {
       
       // Reset status after 3 seconds
       setTimeout(() => setSubmitStatus(''), 3000);
-    }, 1000);
+    }, 500);
   };
 
   const contactInfo = [

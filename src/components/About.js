@@ -74,6 +74,9 @@ const About = () => {
           <p className="text-gold-400 text-lg font-semibold">
             (PVT) LTD - Business & Financial Consulting
           </p>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Your Ambition, Our Precitiion.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

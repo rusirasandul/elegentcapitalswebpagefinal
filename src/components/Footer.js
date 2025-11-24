@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [email, setEmail] = useState('');
+  const [subscribeStatus, setSubscribeStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const footerLinks = {
     services: [
@@ -69,6 +72,43 @@ const Footer = () => {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
+    }
+  };
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    
+    if (!email) {
+      setSubscribeStatus('error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubscribeStatus('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubscribeStatus('success');
+        setEmail('');
+      } else {
+        setSubscribeStatus('error');
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      setSubscribeStatus('error');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubscribeStatus(''), 5000);
     }
   };
 
@@ -171,16 +211,31 @@ const Footer = () => {
               <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
               <p className="text-gray-300">Get the latest insights and business tips delivered to your inbox.</p>
             </div>
-            <div className="flex w-full md:w-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 md:w-64 px-4 py-2 bg-navy-800 text-white placeholder-gray-400 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-gold-500"
-              />
-              <button className="px-6 py-2 bg-gold-500 hover:bg-gold-600 text-white rounded-r-lg transition-colors duration-200">
-                Subscribe
-              </button>
-            </div>
+            <form onSubmit={handleSubscribe} className="flex flex-col w-full md:w-auto">
+              <div className="flex w-full md:w-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSubmitting}
+                  className="flex-1 md:w-64 px-4 py-2 bg-navy-800 text-white placeholder-gray-400 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-gold-500 disabled:opacity-50"
+                />
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-6 py-2 bg-gold-500 hover:bg-gold-600 text-white rounded-r-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                </button>
+              </div>
+              {subscribeStatus === 'success' && (
+                <p className="text-green-400 text-sm mt-2">Successfully subscribed! Thank you!</p>
+              )}
+              {subscribeStatus === 'error' && (
+                <p className="text-red-400 text-sm mt-2">Please enter a valid email address.</p>
+              )}
+            </form>
           </div>
         </div>
 

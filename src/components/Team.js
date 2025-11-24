@@ -66,9 +66,9 @@ const Team = () => {
       expertise: ["Web Development", "Backend Development", "Full Stack Development" ,"Degital Marketing"],
       image: `${process.env.PUBLIC_URL}/images/team/rusira.jpg`, // Local image path - add your photo to public/images/team/
       social: {
-        linkedin: "https://linkedin.com/in/david-thompson-strategy",
-        instagram: "https://instagram.com/davidthompson_strategy",
-        email: "david@elegantcapitals.com"
+        linkedin: "www.linkedin.com/in/rusira-sandul-b6bb87292",
+        instagram: "https://www.instagram.com/hwrs_2249?igsh=ZnI1ZzRuam92Y2xp&utm_source=qr",
+        email: "elegantcapitals.rusiras@gmail.com"
       }
     },
     
