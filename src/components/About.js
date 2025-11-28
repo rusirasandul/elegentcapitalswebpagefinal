@@ -60,7 +60,7 @@ const About = () => {
             <img 
               src={`${process.env.PUBLIC_URL}/images/logo/logo.jpeg`}
               alt="Elegant Capitals Logo" 
-              className="h-20 max-w-xs object-contain"
+              className="h-24 max-w-xs object-contain mb-4"
               onLoad={() => console.log('Logo loaded successfully')}
               onError={(e) => {
                 console.error('Logo failed to load from:', e.target.src);
@@ -71,11 +71,11 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
             Elegant Capitals
           </h1>
-          <p className="text-gold-400 text-lg font-semibold">
+          <p className="text-gold-400 text-xl md:text-2xl font-semibold mb-3">
             (PVT) LTD - Business & Financial Consulting
           </p>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            Your Ambition, Our Precitiion.
+          <p className="text-gold-300 text-lg md:text-xl font-medium italic mt-4 max-w-2xl mx-auto">
+            Your Ambition, Our Precition.
           </p>
         </div>
 

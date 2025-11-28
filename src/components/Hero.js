@@ -34,10 +34,13 @@ const Hero = () => {
             }`}
           >
             <span className="block text-white dark:text-white mb-2">
-              Empowering Businesses
+              Elegant Capitals
             </span>
-            <span className="block gradient-text">
-              with Clarity and Confidence
+            <span className="block text-gold-400 text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
+              (PVT) LTD - Business & Financial Consulting
+            </span>
+            <span className="block text-gold-300 text-xl md:text-2xl lg:text-3xl font-medium italic">
+              Your Ambition, Our Precition.
             </span>
           </h1>
 
@@ -47,7 +50,6 @@ const Hero = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            Elegant Capitals (PVT) LTD is your trusted partner in business and financial consulting. 
             We provide strategic guidance to help your business thrive in today's competitive landscape.
           </p>
 

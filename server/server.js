@@ -12,10 +12,20 @@ app.use(express.json());
 
 // Database file path
 const dbPath = path.join(__dirname, 'subscribers.json');
+const careersDbPath = path.join(__dirname, 'careers.json');
+const applicationsDbPath = path.join(__dirname, 'applications.json');
 
 // Initialize database file if it doesn't exist
 if (!fs.existsSync(dbPath)) {
   fs.writeFileSync(dbPath, JSON.stringify({ subscribers: [] }, null, 2));
+}
+
+if (!fs.existsSync(careersDbPath)) {
+  fs.writeFileSync(careersDbPath, JSON.stringify({ jobs: [] }, null, 2));
+}
+
+if (!fs.existsSync(applicationsDbPath)) {
+  fs.writeFileSync(applicationsDbPath, JSON.stringify({ applications: [] }, null, 2));
 }
 
 // Helper function to read database
@@ -164,8 +174,278 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running' });
 });
 
+// ============ CAREERS ENDPOINTS ============
+
+// Get all active jobs
+app.get('/api/careers', (req, res) => {
+  try {
+    const data = fs.readFileSync(careersDbPath, 'utf8');
+    const db = JSON.parse(data);
+    res.json({ 
+      success: true, 
+      count: db.jobs.length,
+      jobs: db.jobs 
+    });
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error fetching jobs' 
+    });
+  }
+});
+
+// Add new job (admin)
+app.post('/api/careers/add', (req, res) => {
+  const { title, description, location, type, salary } = req.body;
+
+  if (!title || !description || !location || !type) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Please provide all required fields' 
+    });
+  }
+
+  try {
+    const data = fs.readFileSync(careersDbPath, 'utf8');
+    const db = JSON.parse(data);
+
+    const newJob = {
+      id: Date.now(),
+      title,
+      description,
+      location,
+      type,
+      salary: salary || 'Competitive',
+      status: 'active',
+      createdAt: new Date().toISOString()
+    };
+
+    db.jobs.push(newJob);
+    fs.writeFileSync(careersDbPath, JSON.stringify(db, null, 2));
+
+    res.status(201).json({ 
+      success: true, 
+      message: 'Job posted successfully!',
+      job: newJob
+    });
+  } catch (error) {
+    console.error('Error adding job:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error adding job' 
+    });
+  }
+});
+
+// Update job status (admin)
+app.put('/api/careers/:id', (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const data = fs.readFileSync(careersDbPath, 'utf8');
+    const db = JSON.parse(data);
+    
+    const jobIndex = db.jobs.findIndex(job => job.id === parseInt(id));
+    
+    if (jobIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Job not found' 
+      });
+    }
+
+    db.jobs[jobIndex].status = status;
+    db.jobs[jobIndex].updatedAt = new Date().toISOString();
+    
+    fs.writeFileSync(careersDbPath, JSON.stringify(db, null, 2));
+
+    res.json({ 
+      success: true, 
+      message: 'Job updated successfully',
+      job: db.jobs[jobIndex]
+    });
+  } catch (error) {
+    console.error('Error updating job:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error updating job' 
+    });
+  }
+});
+
+// Delete job (admin)
+app.delete('/api/careers/:id', (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const data = fs.readFileSync(careersDbPath, 'utf8');
+    const db = JSON.parse(data);
+    
+    const jobIndex = db.jobs.findIndex(job => job.id === parseInt(id));
+    
+    if (jobIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Job not found' 
+      });
+    }
+
+    db.jobs.splice(jobIndex, 1);
+    fs.writeFileSync(careersDbPath, JSON.stringify(db, null, 2));
+
+    res.json({ 
+      success: true, 
+      message: 'Job deleted successfully'
+    });
+  } catch (error) {
+    console.error('Error deleting job:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error deleting job' 
+    });
+  }
+});
+
+// Submit job application
+app.post('/api/careers/apply', (req, res) => {
+  const { jobId, jobTitle, name, email, phone, coverLetter, resumeName } = req.body;
+
+  if (!jobId || !name || !email || !phone || !coverLetter) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Please provide all required fields' 
+    });
+  }
+
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Please provide a valid email address' 
+    });
+  }
+
+  try {
+    const data = fs.readFileSync(applicationsDbPath, 'utf8');
+    const db = JSON.parse(data);
+
+    const newApplication = {
+      id: Date.now(),
+      jobId,
+      jobTitle,
+      name,
+      email: email.toLowerCase(),
+      phone,
+      coverLetter,
+      resumeName,
+      status: 'pending',
+      appliedAt: new Date().toISOString()
+    };
+
+    db.applications.push(newApplication);
+    fs.writeFileSync(applicationsDbPath, JSON.stringify(db, null, 2));
+
+    res.status(201).json({ 
+      success: true, 
+      message: 'Application submitted successfully!',
+      application: newApplication
+    });
+  } catch (error) {
+    console.error('Application error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error submitting application' 
+    });
+  }
+});
+
+// Get all applications (admin)
+app.get('/api/careers/applications', (req, res) => {
+  try {
+    const data = fs.readFileSync(applicationsDbPath, 'utf8');
+    const db = JSON.parse(data);
+    res.json({ 
+      success: true, 
+      count: db.applications.length,
+      applications: db.applications 
+    });
+  } catch (error) {
+    console.error('Error fetching applications:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error fetching applications' 
+    });
+  }
+});
+
+// Export applications to CSV
+app.get('/api/careers/applications/export', (req, res) => {
+  try {
+    const data = fs.readFileSync(applicationsDbPath, 'utf8');
+    const db = JSON.parse(data);
+    
+    // Create CSV content
+    let csv = 'Job Title,Name,Email,Phone,Status,Applied Date,Resume\n';
+    db.applications.forEach(app => {
+      csv += `"${app.jobTitle}","${app.name}","${app.email}","${app.phone}","${app.status}","${app.appliedAt}","${app.resumeName}"\n`;
+    });
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=job_applications.csv');
+    res.send(csv);
+  } catch (error) {
+    console.error('Export error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error exporting applications' 
+    });
+  }
+});
+
+// Update application status (admin)
+app.put('/api/careers/applications/:id', (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const data = fs.readFileSync(applicationsDbPath, 'utf8');
+    const db = JSON.parse(data);
+    
+    const appIndex = db.applications.findIndex(app => app.id === parseInt(id));
+    
+    if (appIndex === -1) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Application not found' 
+      });
+    }
+
+    db.applications[appIndex].status = status;
+    db.applications[appIndex].updatedAt = new Date().toISOString();
+    
+    fs.writeFileSync(applicationsDbPath, JSON.stringify(db, null, 2));
+
+    res.json({ 
+      success: true, 
+      message: 'Application status updated',
+      application: db.applications[appIndex]
+    });
+  } catch (error) {
+    console.error('Error updating application:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Error updating application' 
+    });
+  }
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`✅ Server is running on http://localhost:${PORT}`);
   console.log(`📧 Subscriber database: ${dbPath}`);
+  console.log(`💼 Careers database: ${careersDbPath}`);
+  console.log(`📝 Applications database: ${applicationsDbPath}`);
 });
