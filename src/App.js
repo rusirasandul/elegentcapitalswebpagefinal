@@ -8,6 +8,7 @@ import Careers from './components/Careers';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import ChristmasDecorations from './components/ChristmasDecorations';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode
@@ -40,6 +41,7 @@ function App() {
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className="bg-navy-900 dark:bg-gray-900 text-gray-100 dark:text-white transition-colors duration-300">
+        <ChristmasDecorations />
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Hero />
         <About />
