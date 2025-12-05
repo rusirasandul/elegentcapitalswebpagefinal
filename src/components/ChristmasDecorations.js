@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 const ChristmasDecorations = () => {
   const [snowflakes, setSnowflakes] = useState([]);
-  const [showBells, setShowBells] = useState(true);
 
   useEffect(() => {
     // Create snowflakes
@@ -36,30 +35,6 @@ const ChristmasDecorations = () => {
         ))}
       </div>
 
-      {/* Jingle Bells Corner Decoration */}
-      {showBells && (
-        <div className="fixed top-4 right-4 z-50 pointer-events-auto">
-          <div className="relative bg-gradient-to-br from-red-600 to-green-600 p-4 rounded-full shadow-2xl animate-bounce-slow">
-            <div className="text-4xl animate-swing">
-              🔔
-            </div>
-            <div className="absolute -top-2 -right-2 w-6 h-6 bg-gold-400 rounded-full animate-pulse"></div>
-            <button
-              onClick={() => setShowBells(false)}
-              className="absolute -bottom-1 -right-1 w-5 h-5 bg-white text-red-600 rounded-full text-xs font-bold hover:bg-gray-200 transition-colors"
-              title="Hide decorations"
-            >
-              ✕
-            </button>
-          </div>
-          
-          {/* Holly decoration */}
-          <div className="absolute -top-3 -left-3 text-2xl animate-pulse">
-            🎄
-          </div>
-        </div>
-      )}
-
       {/* Christmas Lights Top Border */}
       <div className="fixed top-0 left-0 right-0 z-40 pointer-events-none">
         <div className="flex justify-around py-2">
@@ -88,13 +63,6 @@ const ChristmasDecorations = () => {
       <div className="fixed bottom-20 right-4 z-40 pointer-events-none animate-float" style={{ animationDelay: '1s' }}>
         <div className="text-6xl">
           🎅
-        </div>
-      </div>
-
-      {/* Gift Box */}
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40 pointer-events-none animate-bounce-slow">
-        <div className="text-4xl">
-          🎁
         </div>
       </div>
 
