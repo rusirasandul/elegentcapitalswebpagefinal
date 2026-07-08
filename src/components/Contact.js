@@ -72,7 +72,7 @@ const Contact = () => {
         </svg>
       ),
       title: "Address",
-      details: "18A ,Pagoda Road, Nugegoda."
+      details: "60A Pagoda Road, Nugegoda."
     },
     {
       icon: (

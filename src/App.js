@@ -7,7 +7,9 @@ import Team from './components/Team';
 import Careers from './components/Careers';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Seo from './components/Seo';
 import WhatsAppButton from './components/WhatsAppButton';
+import bgImage from './assets/R.jpg';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true); // Default to dark mode
@@ -38,8 +40,18 @@ function App() {
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
-      <div className="bg-navy-900 dark:bg-gray-900 text-gray-100 dark:text-white transition-colors duration-300">
+    <div 
+      className={`min-h-screen ${darkMode ? 'dark' : ''}`}
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <Seo />
+      <div className="bg-navy-900 dark:bg-gray-900 text-gray-100 dark:text-white transition-colors duration-300" style={{ backgroundColor: 'rgba(17, 24, 39, 0.3)' }}>
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Hero />
         <About />
