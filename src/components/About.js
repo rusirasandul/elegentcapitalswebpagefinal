@@ -24,8 +24,8 @@ const About = () => {
   const values = [
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
       title: "Excellence",
@@ -33,8 +33,8 @@ const About = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
         </svg>
       ),
       title: "Integrity",
@@ -42,8 +42,8 @@ const About = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
       title: "Innovation",
@@ -51,16 +51,24 @@ const About = () => {
     }
   ];
 
+  const milestones = [
+    { year: '2024', event: 'Company Founded', detail: 'Established as a boutique consulting firm' },
+    { year: '2024', event: 'First Major Client', detail: 'Secured partnerships with leading businesses' },
+    { year: '2025', event: 'Team Expansion', detail: 'Grew to a team of expert consultants' },
+    { year: '2025', event: '50+ Projects', detail: 'Milestone of successful project completions' },
+  ];
+
   return (
-    <section id="about" className="section-padding bg-black">
-      <div className="container-max">
-        {/* Logo at top */}
-        <div className="text-center mb-12">
-          <div style={{minHeight: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-            <img 
+    <section id="about" className="section-padding-gc bg-transparent relative border-b border-slate-800/80">
+      <div className="container-max relative z-10">
+        {/* Logo & Branding */}
+        <div className="text-center mb-16">
+          <div style={{ minHeight: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img
               src={`${process.env.PUBLIC_URL}/images/logo/logo.jpeg`}
-              alt="Elegant Capitals Logo" 
-              className="h-24 max-w-xs object-contain mb-4"
+              alt="Elegant Capitals Logo"
+              className="h-20 max-w-xs object-contain mb-4 rounded-lg"
+              style={{ filter: 'drop-shadow(0 0 15px rgba(201, 169, 110, 0.2))' }}
               onLoad={() => console.log('Logo loaded successfully')}
               onError={(e) => {
                 console.error('Logo failed to load from:', e.target.src);
@@ -68,99 +76,115 @@ const About = () => {
               }}
             />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+          <h1 className="text-4xl md:text-5xl font-bold font-display gradient-text-white mb-3">
             Elegant Capitals
           </h1>
-          <p className="text-gold-400 text-xl md:text-2xl font-semibold mb-3">
-            (PVT) LTD - Business & Financial Consulting
+          <p className="text-champagne-400 text-xl md:text-2xl font-medium mb-2 tracking-wide">
+            (PVT) LTD — Business & Financial Consulting
           </p>
-          <p className="text-gold-300 text-lg md:text-xl font-medium italic mt-4 max-w-2xl mx-auto">
-            Your Ambition, Our Precition.
+          <p className="shimmer-text text-lg md:text-xl font-medium italic mt-4 max-w-2xl mx-auto">
+            Your Ambition, Our Precision.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-white dark:text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold font-display gradient-text-white mb-6">
               About Elegant Capitals
             </h2>
-            <p className="text-lg text-gray-200 dark:text-gray-300 mb-6">
-              Founded in 2024, Elegant Capitals (PVT) LTD has been at the forefront of business 
-              and financial consulting, helping organizations navigate complex challenges and 
+            <p className="text-lg text-midnight-200 mb-6 leading-relaxed">
+              Founded in 2024, Elegant Capitals (PVT) LTD has been at the forefront of business
+              and financial consulting, helping organizations navigate complex challenges and
               achieve sustainable growth.
             </p>
-            <p className="text-lg text-gray-200 dark:text-gray-300 mb-8">
-              Our mission is to empower businesses with clarity and confidence through strategic 
+            <p className="text-lg text-midnight-200 mb-8 leading-relaxed">
+              Our mission is to empower businesses with clarity and confidence through strategic
               guidance, innovative solutions, and unwavering commitment to our clients' success.
             </p>
-            
+
             {/* Mission Statement */}
-            <div className="bg-gray-800 p-6 rounded-lg border border-gray-700">
-              <h3 className="text-xl font-semibold text-white mb-3">Our Mission</h3>
-              <p className="text-gray-200">
-                To provide exceptional business and financial consulting services that drive 
+            <div className="glass-card p-6">
+              <h3 className="text-xl font-semibold font-display text-champagne-300 mb-3">Our Mission</h3>
+              <p className="text-midnight-200 leading-relaxed">
+                To provide exceptional business and financial consulting services that drive
                 measurable results and create lasting value for our clients across all industries.
               </p>
             </div>
           </div>
 
+          {/* Timeline */}
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             <div className="relative">
-              <div className="bg-gradient-to-br from-black to-gray-800 rounded-lg p-8 text-white border border-gray-700">
-                <h3 className="text-2xl font-bold mb-4 text-gold-400">Years of Excellence</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-gold-400 rounded-full mr-3"></div>
-                    <span>Strategic Business Planning</span>
+              {/* Timeline Line */}
+              <div
+                className="absolute left-6 top-0 bottom-0 w-px"
+                style={{ background: 'linear-gradient(180deg, rgba(201,169,110,0.5), rgba(201,169,110,0.1))' }}
+              ></div>
+
+              <div className="space-y-8">
+                {milestones.map((milestone, index) => (
+                  <div
+                    key={index}
+                    className="relative flex items-start pl-16"
+                    style={{
+                      transitionDelay: `${index * 150}ms`,
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible ? 'translateX(0)' : 'translateX(20px)',
+                      transition: 'all 0.6s ease-out',
+                    }}
+                  >
+                    {/* Timeline Dot */}
+                    <div
+                      className="absolute left-4 w-5 h-5 rounded-full border-2 border-champagne-500 flex items-center justify-center"
+                      style={{ background: '#0c1220', top: '4px' }}
+                    >
+                      <div className="w-2 h-2 rounded-full bg-champagne-400"></div>
+                    </div>
+
+                    <div className="glass-card p-5 w-full">
+                      <span className="text-champagne-400 text-sm font-semibold tracking-widest uppercase">{milestone.year}</span>
+                      <h4 className="text-white font-semibold font-display text-lg mt-1">{milestone.event}</h4>
+                      <p className="text-midnight-300 text-sm mt-1">{milestone.detail}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-gold-400 rounded-full mr-3"></div>
-                    <span>Financial Advisory Services</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-gold-400 rounded-full mr-3"></div>
-                    <span>Operations Optimization</span>
-                  </div>
-                  <div className="flex items-center">
-                    <div className="w-3 h-3 bg-gold-400 rounded-full mr-3"></div>
-                    <span>Risk Management</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 w-16 h-16 bg-gold-400 rounded-full flex items-center justify-center animate-pulse">
-                <span className="text-navy-800 font-bold text-xl">50+</span>
-              </div>
-              <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-black border-2 border-gold-400 rounded-full flex items-center justify-center animate-pulse" style={{animationDelay: '1s'}}>
-                <span className="text-white font-bold text-xs">100%</span>
+                ))}
               </div>
             </div>
           </div>
         </div>
 
         {/* Values Section */}
-        <div className="mt-16">
-          <h3 className="text-2xl md:text-3xl font-bold text-center text-white mb-12">
+        <div className="mt-24">
+          <h3 className="text-2xl md:text-3xl font-bold font-display text-center gradient-text-white mb-14">
             Our Core Values
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <div 
+              <div
                 key={index}
-                className={`text-center p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{transitionDelay: `${index * 200}ms`}}
+                className={`text-center glass-card p-8 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                style={{
+                  transitionDelay: `${index * 200}ms`,
+                  transition: 'all 0.6s ease-out',
+                }}
               >
-                <div className="text-gold-400 mb-4 flex justify-center">
-                  {value.icon}
+                <div className="mb-5 flex justify-center">
+                  <div
+                    className="w-14 h-14 rounded-xl flex items-center justify-center text-champagne-400"
+                    style={{
+                      background: 'rgba(201, 169, 110, 0.1)',
+                      border: '1px solid rgba(201, 169, 110, 0.2)',
+                    }}
+                  >
+                    {value.icon}
+                  </div>
                 </div>
-                <h4 className="text-xl font-semibold text-white mb-3">
+                <h4 className="text-xl font-semibold font-display text-white mb-3">
                   {value.title}
                 </h4>
-                <p className="text-gray-200">
+                <p className="text-midnight-200 leading-relaxed">
                   {value.description}
                 </p>
               </div>

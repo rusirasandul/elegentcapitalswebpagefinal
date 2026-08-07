@@ -15,7 +15,17 @@ const WhatsAppButton = () => {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 animate-pulse"
+      className="fixed bottom-6 right-6 z-40 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 group"
+      style={{
+        background: 'linear-gradient(135deg, #25D366, #128C7E)',
+        boxShadow: '0 4px 20px rgba(37, 211, 102, 0.3)',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = '0 6px 30px rgba(37, 211, 102, 0.5)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = '0 4px 20px rgba(37, 211, 102, 0.3)';
+      }}
       aria-label="Contact us on WhatsApp"
       title="Chat with us on WhatsApp"
     >

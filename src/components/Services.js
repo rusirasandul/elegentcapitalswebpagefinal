@@ -24,8 +24,8 @@ const Services = () => {
   const services = [
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       ),
       title: "Business Strategy",
@@ -34,8 +34,8 @@ const Services = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
         </svg>
       ),
       title: "Financial Advisory",
@@ -44,9 +44,9 @@ const Services = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
       title: "Operations Optimization",
@@ -55,8 +55,8 @@ const Services = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
       ),
       title: "Risk Management",
@@ -65,8 +65,8 @@ const Services = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
       title: "Leadership Development",
@@ -75,8 +75,8 @@ const Services = () => {
     },
     {
       icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
       ),
       title: "Performance Analytics",
@@ -86,85 +86,114 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="section-padding bg-black">
-      <div className="container-max">
+    <section id="services" className="section-padding-gc bg-transparent relative border-b border-slate-800/80">
+      <div className="container-max relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 
-            className={`text-3xl md:text-4xl font-bold text-white dark:text-white mb-6 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+        <div className="text-center mb-20">
+          <span
+            className={`text-champagne-500 text-sm font-semibold tracking-[0.2em] uppercase mb-4 block transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+          >
+            What We Offer
+          </span>
+          <h2
+            className={`text-3xl md:text-4xl lg:text-5xl font-bold font-display gradient-text-white mb-6 transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
             Our Services
           </h2>
-          <p 
-            className={`text-lg text-gray-200 dark:text-gray-300 max-w-3xl mx-auto transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          <p
+            className={`text-lg text-midnight-200 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
-            We offer comprehensive consulting services designed to address every aspect of your business needs, 
+            We offer comprehensive consulting services designed to address every aspect of your business needs,
             from strategic planning to operational excellence.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <div 
+            <div
               key={index}
-              className={`bg-navy-800 dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 p-6 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{transitionDelay: `${index * 100}ms`}}
+              className={`glass-card p-7 group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+              style={{
+                transitionDelay: `${index * 100}ms`,
+                transition: 'all 0.6s ease-out',
+              }}
             >
               {/* Icon */}
-              <div className="text-gold-400 mb-4">
-                {service.icon}
+              <div className="mb-5">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-champagne-400 transition-all duration-300 group-hover:scale-110"
+                  style={{
+                    background: 'rgba(201, 169, 110, 0.1)',
+                    border: '1px solid rgba(201, 169, 110, 0.2)',
+                  }}
+                >
+                  {service.icon}
+                </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold text-white dark:text-white mb-3">
+              <h3 className="text-xl font-semibold font-display text-white mb-3">
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-200 dark:text-gray-300 mb-4">
+              <p className="text-midnight-200 mb-5 leading-relaxed text-sm">
                 {service.description}
               </p>
 
               {/* Features */}
-              <ul className="space-y-2">
+              <ul className="space-y-2.5">
                 {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-sm text-gray-200 dark:text-gray-300">
-                    <div className="w-2 h-2 bg-gold-400 rounded-full mr-3"></div>
+                  <li key={featureIndex} className="flex items-center text-sm text-midnight-300">
+                    <div
+                      className="w-1.5 h-1.5 rounded-full mr-3 flex-shrink-0"
+                      style={{ background: 'linear-gradient(135deg, #c9a96e, #e8d5a3)' }}
+                    ></div>
                     {feature}
                   </li>
                 ))}
               </ul>
 
-              {/* Learn More Button */}
-              <button className="mt-4 text-gold-400 hover:text-gold-300 font-medium transition-colors duration-200">
-                Learn More →
+              {/* Learn More */}
+              <button className="mt-6 text-champagne-400 hover:text-champagne-300 font-medium transition-all duration-300 text-sm flex items-center group/btn">
+                Learn More
+                <svg className="w-4 h-4 ml-1 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
               </button>
             </div>
           ))}
         </div>
 
         {/* CTA Section */}
-        <div 
-          className={`mt-16 text-center bg-gradient-to-r from-navy-700 to-gold-600 rounded-lg p-8 text-white transition-all duration-1000 delay-500 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <div
+          className={`mt-20 text-center rounded-2xl p-10 md:p-14 relative overflow-hidden transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          style={{
+            background: 'linear-gradient(135deg, rgba(201, 169, 110, 0.12), rgba(26, 35, 64, 0.8))',
+            border: '1px solid rgba(201, 169, 110, 0.2)',
+          }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+          {/* Decorative orb */}
+          <div
+            className="absolute -top-20 -right-20 w-40 h-40 rounded-full opacity-20"
+            style={{ background: 'radial-gradient(circle, rgba(201,169,110,0.4), transparent)' }}
+          ></div>
+
+          <h3 className="text-2xl md:text-3xl font-bold font-display gradient-text-white mb-4 relative z-10">
             Ready to Transform Your Business?
           </h3>
-          <p className="text-lg mb-6 opacity-90">
+          <p className="text-lg mb-8 text-midnight-200 max-w-2xl mx-auto relative z-10">
             Let's discuss how our consulting services can help you achieve your business goals.
           </p>
-          <button 
+          <button
             onClick={() => document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })}
-            className="bg-white text-navy-800 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+            className="btn-primary px-10 py-4 text-lg font-display relative z-10"
           >
             Get Started Today
           </button>

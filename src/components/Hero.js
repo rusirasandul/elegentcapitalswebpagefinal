@@ -1,4 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
+const AnimatedCounter = ({ target, suffix = '', duration = 2000 }) => {
+  const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          const startTime = Date.now();
+          const numericTarget = parseInt(target);
+
+          const animate = () => {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(easedProgress * numericTarget));
+
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [target, duration, hasAnimated]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+};
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -7,101 +43,86 @@ const Hero = () => {
     setIsVisible(true);
   }, []);
 
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact');
+  const scrollToSection = (id) => {
+    const element = document.querySelector(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
+    <header id="home" className="relative min-h-screen pt-32 pb-20 flex flex-col justify-center overflow-hidden bg-transparent">
       
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gold-600 dark:bg-gold-800 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-navy-700 dark:bg-navy-800 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
-
-      <div className="relative z-10 container-max section-padding">
-        <div className="text-center">
-          {/* Main Heading */}
-          <h1 
-            className={`text-4xl md:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <span className="block text-white dark:text-white mb-2">
-              Elegant Capitals
-            </span>
-            <span className="block text-gold-400 text-2xl md:text-3xl lg:text-4xl font-semibold mb-4">
-              (PVT) LTD - Business & Financial Consulting
-            </span>
-            <span className="block text-gold-300 text-xl md:text-2xl lg:text-3xl font-medium italic">
-              Your Ambition, Our Precition.
+      <div className="container-gc px-4 sm:px-6 lg:px-8 relative z-10 my-auto text-center">
+        
+        {/* Main Content Container */}
+        <div className="max-w-4xl mx-auto space-y-8">
+          
+          {/* Hero Main Heading */}
+          <h1 className={`text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.12] text-white transition-all duration-1000 drop-shadow-2xl ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            Business Consulting That Turns Ideas Into{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400">
+              Sustainable Success.
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p 
-            className={`text-lg md:text-xl text-gray-200 dark:text-gray-300 mb-8 max-w-3xl mx-auto transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            We provide strategic guidance to help your business thrive in today's competitive landscape.
+          {/* Hero Subtitle */}
+          <p className={`text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-200 drop-shadow-lg font-medium ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            Integrated management consulting, financial advisory, tax, ISO compliance, and technology solutions — helping businesses grow with confidence.
           </p>
 
-          {/* CTA Buttons */}
-          <div 
-            className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-500 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
+          {/* Hero Actions */}
+          <div className={`flex flex-wrap items-center justify-center gap-4 pt-4 transition-all duration-1000 delay-300 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
             <button
-              onClick={scrollToContact}
-              className="btn-primary text-lg px-8 py-4"
+              onClick={() => scrollToSection('#contact')}
+              className="btn-gc-primary group shadow-2xl px-8 py-4 text-base font-bold"
             >
-              Get Started Today
+              <span>Book a Free Call</span>
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
             </button>
+
             <button
-              onClick={() => document.querySelector('#about').scrollIntoView({ behavior: 'smooth' })}
-              className="btn-outline text-lg px-8 py-4"
+              onClick={() => scrollToSection('#services')}
+              className="btn-gc-secondary shadow-xl bg-[#0b172a]/70 backdrop-blur-md px-8 py-4 text-base"
             >
-              Learn More
+              Explore Services
             </button>
           </div>
 
-          {/* Stats */}
-          <div 
-            className={`grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 transition-all duration-1000 delay-700 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">50+</div>
-              <div className="text-gray-200">Projects Completed</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">5+</div>
-              <div className="text-gray-200">Years Experience</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">100%</div>
-              <div className="text-gray-200">Client Satisfaction</div>
-            </div>
-          </div>
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-navy-800 dark:border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-navy-800 dark:bg-white rounded-full mt-2 animate-pulse"></div>
+        {/* Hero Bottom Stats Bar */}
+        <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 mt-24 pt-8 border-t border-slate-800/80 max-w-5xl mx-auto transition-all duration-1000 delay-500 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
+          {[
+            { value: '12', suffix: '+', label: 'Integrated Services', icon: '⚡' },
+            { value: '5', suffix: '+', label: 'Lead Consultants', icon: '👥' },
+            { value: '100', suffix: '%', label: 'Custom Engagements', icon: '🎯' },
+            { value: '4', suffix: '-Step', label: 'Proven Methodology', icon: '⚙️' },
+          ].map((stat, idx) => (
+            <div key={idx} className="glass-card-gc p-4 sm:p-5 flex items-center justify-center space-x-4 backdrop-blur-2xl bg-[#0b172a]/80 border border-slate-800">
+              <div className="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-lg flex-shrink-0">
+                {stat.icon}
+              </div>
+              <div className="text-left">
+                <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono tracking-tight">
+                  <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-xs text-slate-300 font-medium">{stat.label}</div>
+              </div>
+            </div>
+          ))}
         </div>
+
       </div>
-    </section>
+    </header>
   );
 };
 

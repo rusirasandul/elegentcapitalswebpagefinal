@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Navbar = ({ darkMode, toggleDarkMode }) => {
+const Navbar = ({ openModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 30);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -14,114 +14,128 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   }, []);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Team', href: '#team' },
-    { name: 'Careers', href: '#careers' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '#home', type: 'scroll' },
+    { name: 'About', href: '#about', type: 'scroll' },
+    { name: 'Services', href: '#services', type: 'scroll' },
+    { name: 'Team', type: 'modal', modalKey: 'team' },
+    { name: 'Careers', type: 'modal', modalKey: 'careers' },
+    { name: 'Contact', href: '#contact', type: 'scroll' },
   ];
 
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (item) => {
+    if (item.type === 'modal') {
+      openModal(item.modalKey);
+    } else {
+      const element = document.querySelector(item.href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMobileMenuOpen(false);
   };
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-black/95 backdrop-blur-sm shadow-lg'
-          : 'bg-black/90'
+          ? 'py-3 bg-[#07111f]/85 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl'
+          : 'py-5 bg-transparent'
       }`}
     >
-      <div className="container-max">
-        <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <div className="flex items-center space-x-2">
-              <img 
-                src={`${process.env.PUBLIC_URL}/images/logo/logo.jpeg`}
-                alt="Elegant Capitals Logo" 
-                className="h-12 w-auto object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="w-10 h-10 bg-gradient-to-r from-navy-800 to-gold-500 rounded-lg flex items-center justify-center"><span class="text-white font-bold text-sm">EC</span></div>';
-                }}
-              />
-              <span className="text-xl font-bold text-white hidden sm:inline">
+      <div className="container-gc px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-12">
+          
+          {/* Logo & Brand */}
+          <div 
+            className="flex items-center space-x-3 group cursor-pointer" 
+            onClick={() => handleNavClick({ href: '#home', type: 'scroll' })}
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-500 to-purple-600 p-[1px] shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
+              <div className="w-full h-full bg-[#07111f] rounded-[11px] flex items-center justify-center overflow-hidden">
+                <img 
+                  src={`${process.env.PUBLIC_URL}/images/logo/logo.jpeg`} 
+                  alt="Elegant Capitals Logo" 
+                  className="w-full h-full object-cover rounded-[11px]"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'flex';
+                  }}
+                />
+                <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300 text-base font-mono hidden">
+                  EC
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
                 Elegant Capitals
+              </span>
+              <span className="text-[10px] text-slate-400 tracking-widest uppercase font-medium -mt-1">
+                Consulting Group
               </span>
             </div>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="text-gray-200 hover:text-gold-400 px-3 py-2 text-sm font-medium transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
+          {/* Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center space-x-1 bg-slate-900/60 backdrop-blur-lg border border-slate-800/80 rounded-full px-4 py-1.5 shadow-inner">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item)}
+                className="text-slate-300 hover:text-white px-4 py-1.5 text-xs font-semibold transition-all rounded-full hover:bg-slate-800/60"
+              >
+                {item.name}
+              </button>
+            ))}
           </div>
 
-          {/* Dark Mode Toggle & Mobile Menu Button */}
-          <div className="flex items-center space-x-4">
-            {/* Dark Mode Toggle */}
+          {/* Right CTA Button */}
+          <div className="hidden lg:flex items-center">
             <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-              aria-label="Toggle dark mode"
+              onClick={() => handleNavClick({ href: '#contact', type: 'scroll' })}
+              className="btn-gc-primary group text-xs sm:text-sm px-6 py-2.5"
             >
-              {darkMode ? (
-                <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                </svg>
+              <span>Book a Free Call</span>
+              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-200 hover:text-white transition-colors"
+            aria-label="Toggle Navigation"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               ) : (
-                <svg className="w-5 h-5 text-gray-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                </svg>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               )}
-            </button>
-
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-              aria-label="Toggle mobile menu"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
+            </svg>
+          </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-navy-900 border-t border-gray-700">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-2 text-base font-medium text-gray-200 hover:text-gold-400 hover:bg-navy-800 rounded-md transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
-              ))}
+          <div className="lg:hidden mt-3 p-4 bg-[#0b172a]/95 backdrop-blur-2xl border border-slate-800/90 rounded-2xl space-y-2 shadow-2xl animate-in fade-in slide-in-from-top-2">
+            {navItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item)}
+                className="block w-full text-left px-4 py-2.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-xl transition-colors"
+              >
+                {item.name}
+              </button>
+            ))}
+            <div className="pt-2 border-t border-slate-800/80">
+              <button
+                onClick={() => handleNavClick({ href: '#contact', type: 'scroll' })}
+                className="btn-gc-primary w-full text-sm py-3 justify-center"
+              >
+                <span>Book a Free Call</span>
+                <span className="ml-2">→</span>
+              </button>
             </div>
           </div>
         )}

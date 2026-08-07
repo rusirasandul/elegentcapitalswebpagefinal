@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Careers = () => {
-  const [isVisible, setIsVisible] = useState(false);
+const Careers = ({ onClose }) => {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showApplicationForm, setShowApplicationForm] = useState(false);
@@ -16,24 +15,7 @@ const Careers = () => {
   const [submitStatus, setSubmitStatus] = useState('');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.querySelector('#careers');
-    if (element) {
-      observer.observe(element);
-    }
-
-    // Fetch available jobs
     fetchJobs();
-
-    return () => observer.disconnect();
   }, []);
 
   const fetchJobs = async () => {
@@ -113,225 +95,199 @@ const Careers = () => {
   };
 
   return (
-    <section id="careers" className="section-padding bg-gray-900">
-      <div className="container-max">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 
-            className={`text-3xl md:text-4xl font-bold text-white mb-6 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            Join Our Team
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#07111f]/95 backdrop-blur-2xl p-4 sm:p-8 animate-in fade-in duration-300">
+      
+      {/* Top Bar */}
+      <div className="container-gc flex items-center justify-between py-4 border-b border-slate-800 mb-8">
+        <div className="flex items-center space-x-3">
+          <div className="w-8 h-8 rounded-lg bg-blue-600/30 border border-blue-500/40 flex items-center justify-center font-mono font-bold text-white text-xs">
+            EC
+          </div>
+          <span className="text-lg font-bold text-white tracking-tight">
+            Careers & Opportunities
+          </span>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="p-2.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all group flex items-center space-x-2"
+          aria-label="Close modal"
+        >
+          <span className="text-xs font-semibold px-1">Close Page</span>
+          <span className="text-sm font-bold group-hover:rotate-90 transition-transform">✕</span>
+        </button>
+      </div>
+
+      <div className="container-gc py-8">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="eyebrow-tag justify-center mx-auto">
+            <span>Join Our Team</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            Explore Career Opportunities at{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">
+              Elegant Capitals
+            </span>
           </h2>
-          <p 
-            className={`text-lg text-gray-300 max-w-3xl mx-auto transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            Be part of a dynamic team that's shaping the future of business consulting. 
-            Explore exciting career opportunities with Elegant Capitals.
+          <p className="mt-4 text-slate-300 text-base sm:text-lg">
+            Be part of a high-impact team shaping the future of management consulting, finance, and technology.
           </p>
         </div>
 
-        {/* Job Listings */}
+        {/* Job Listings / Empty State */}
         {jobs.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-300 text-lg mb-4">
-              We don't have any open positions at the moment.
-            </p>
-            <p className="text-gray-400">
-              Check back soon or send us your resume at{' '}
-              <a href="mailto:elegantcapitals.tharushi@gmail.com" className="text-gold-400 hover:text-gold-300">
-                elegantcapitals.tharushi@gmail.com
+          <div className="text-center max-w-xl mx-auto">
+            <div className="glass-card-gc p-10 border border-slate-800 text-center">
+              <div className="w-14 h-14 mx-auto mb-5 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-3xl text-blue-400">
+                💼
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">No Active Openings Currently</h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6">
+                We are always seeking talented strategy consultants, financial analysts, and full-stack software engineers. Submit your resume directly to our talent acquisition team.
+              </p>
+              <a
+                href="mailto:tharushi@elegantcapitals.com"
+                className="btn-gc-primary text-xs inline-flex py-3 px-8"
+              >
+                <span>Send Resume to tharushi@elegantcapitals.com</span>
+                <span className="ml-2">→</span>
               </a>
-            </p>
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {jobs.map((job, index) => (
-              <div 
-                key={job.id}
-                className={`bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-700 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-                style={{transitionDelay: `${index * 100}ms`}}
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-semibold text-white">
-                    {job.title}
-                  </h3>
-                  <span className="px-3 py-1 bg-gold-500 text-navy-900 text-xs font-semibold rounded-full">
-                    {job.type}
-                  </span>
-                </div>
-                
-                <div className="space-y-2 mb-4 text-gray-300">
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 mr-2 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    {job.location}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {jobs.map((job) => (
+              <div key={job.id} className="glass-card-gc p-7 flex flex-col justify-between border border-slate-800">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-white">{job.title}</h3>
+                    <span className="px-3 py-1 text-[10px] font-mono font-semibold rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                      {job.type}
+                    </span>
                   </div>
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 mr-2 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    {job.salary}
-                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-6">{job.description}</p>
                 </div>
-
-                <p className="text-gray-300 mb-6">
-                  {job.description}
-                </p>
-
                 <button
                   onClick={() => handleApply(job)}
-                  className="w-full btn-primary"
+                  className="btn-gc-primary text-xs py-3 justify-center w-full"
                 >
-                  Apply Now
+                  Apply Now →
                 </button>
               </div>
             ))}
           </div>
         )}
 
-        {/* Application Form Modal */}
+        {/* Application Modal Inner */}
         {showApplicationForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-            <div className="bg-gray-800 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-semibold text-white">
-                  Apply for {selectedJob?.title}
-                </h3>
-                <button
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md">
+            <div className="glass-card-gc p-8 max-w-xl w-full border border-slate-700 space-y-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-white">Apply for {selectedJob?.title}</h3>
+                <button 
                   onClick={() => setShowApplicationForm(false)}
-                  className="text-gray-400 hover:text-white"
+                  className="text-slate-400 hover:text-white"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  ✕
                 </button>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Full Name *
-                  </label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Full Name *</label>
                   <input
                     type="text"
-                    id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-gray-700 text-white placeholder-gray-400"
-                    placeholder="Your full name"
+                    className="input-gc"
+                    placeholder="Your Name"
                   />
                 </div>
-
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Email Address *
-                  </label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Email Address *</label>
                   <input
                     type="email"
-                    id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-gray-700 text-white placeholder-gray-400"
-                    placeholder="your.email@example.com"
+                    className="input-gc"
+                    placeholder="name@company.com"
                   />
                 </div>
-
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                    Phone Number *
-                  </label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Phone Number *</label>
                   <input
                     type="tel"
-                    id="phone"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-gray-700 text-white placeholder-gray-400"
-                    placeholder="+94 XX XXX XXXX"
+                    className="input-gc"
+                    placeholder="+94 77 123 4567"
                   />
                 </div>
-
                 <div>
-                  <label htmlFor="resume" className="block text-sm font-medium text-gray-300 mb-2">
-                    Resume/CV *
-                  </label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Resume / CV (PDF or DOCX)</label>
                   <input
                     type="file"
-                    id="resume"
                     name="resume"
                     onChange={handleFileChange}
                     accept=".pdf,.doc,.docx"
-                    required
-                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-gray-700 text-white"
+                    className="input-gc text-xs text-slate-300 file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-600/30 file:text-blue-300 hover:file:bg-blue-600/50"
                   />
-                  <p className="text-gray-400 text-sm mt-2">
-                    Accepted formats: PDF, DOC, DOCX (Max 5MB)
-                  </p>
                 </div>
-
                 <div>
-                  <label htmlFor="coverLetter" className="block text-sm font-medium text-gray-300 mb-2">
-                    Cover Letter *
-                  </label>
+                  <label className="block text-xs font-semibold text-slate-300 mb-1">Cover Letter *</label>
                   <textarea
-                    id="coverLetter"
                     name="coverLetter"
                     value={formData.coverLetter}
                     onChange={handleInputChange}
                     required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent bg-gray-700 text-white placeholder-gray-400"
-                    placeholder="Tell us why you're interested in this position..."
+                    rows={3}
+                    className="input-gc"
+                    placeholder="Brief introduction..."
                   />
                 </div>
 
-                <div className="flex space-x-4">
+                {submitStatus === 'success' && (
+                  <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold text-center">
+                    ✓ Application submitted successfully!
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-semibold text-center">
+                    ✕ Error submitting application. Please try emailing us directly.
+                  </div>
+                )}
+
+                <div className="flex gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setShowApplicationForm(false)}
-                    className="flex-1 px-6 py-3 border border-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200"
+                    className="btn-gc-secondary text-xs flex-1 py-2.5 justify-center"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-gc-primary text-xs flex-1 py-2.5 justify-center"
                   >
                     {isSubmitting ? 'Submitting...' : 'Submit Application'}
                   </button>
                 </div>
-
-                {submitStatus === 'success' && (
-                  <div className="p-4 bg-green-900 text-green-200 rounded-lg">
-                    Thank you! Your application has been submitted successfully. We'll review it and get back to you soon.
-                  </div>
-                )}
-                
-                {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-900 text-red-200 rounded-lg">
-                    Sorry, there was an error submitting your application. Please try again or contact us directly.
-                  </div>
-                )}
               </form>
             </div>
           </div>
         )}
+
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const SITE_NAME = 'Elegant Capitals (PVT) LTD';
 const SITE_TITLE = 'Elegant Capitals (PVT) LTD | Business & Financial Consulting';
-const SITE_DESCRIPTION = 'Elegant Capitals (PVT) LTD provides business strategy, financial advisory, operations optimization, risk management, and leadership consulting for growing organizations.';
+const SITE_DESCRIPTION = 'Elegant Capitals (PVT) LTD provides business strategy, financial advisory, operations optimization, risk management, and leadership consulting for growing organizations. Your Ambition, Our Precision.';
 const SITE_KEYWORDS = 'Elegant Capitals, business consulting, financial advisory, operations optimization, risk management, leadership development, strategic planning, consulting firm';
 const SOCIAL_LINKS = [
   'https://www.linkedin.com/company/elegant-capitals',
